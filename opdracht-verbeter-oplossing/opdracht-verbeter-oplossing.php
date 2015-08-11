@@ -13,5 +13,5 @@
 
 	<h1>Foutjes verbeteren</h1>
 
-</body>
+</bod
 </html>
