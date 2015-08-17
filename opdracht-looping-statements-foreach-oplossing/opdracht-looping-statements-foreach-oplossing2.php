@@ -29,9 +29,11 @@
                 <li>Analyseer hoe vaak elke letter van het alfabet voorkomt in de tekst (enkel de letters uit het alfabet, geen onderscheid tussen hoofdletters en kleine letters)</li>
 
                 <li>Toon de resultaten op het scherm:
-                	<?php foreach ($charCount as $char => $Count): ?>
-                          <li>Het karakter '<?php echo $char ?>' komt <?php echo $Count ?> keer voor.</li>
-                     <?php endforeach ?>
+                	<ul>
+						<?php foreach ($charCount as $char => $Count): ?>
+                              <li>Het karakter '<?php echo $char ?>' komt <?php echo $Count ?> keer voor.</li>
+                         <?php endforeach ?>
+                     </ul>
                     <p class="tip">Doe wat opzoekingswerk vooraleer je aan deze opdracht begint.</p>
                 </li>
             </ul> 
