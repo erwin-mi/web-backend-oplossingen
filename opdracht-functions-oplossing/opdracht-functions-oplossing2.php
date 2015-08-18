@@ -19,7 +19,7 @@
 		static $result = '$testMultiArray is opgebouwd uit:<br>';
 		foreach($array as $key => $value) {
 			if(is_array($value)){
-				$result .= '&bull; key [' . $key . '] heeft een arrey als waarde:<br>';
+				$result .= '&bull; key [' . $key . '] heeft een array als waarde:<br>';
 				drukMultiArrayAf ($value);
         	} else{
             	$result .= '&nbsp;&nbsp;&nbsp;&#9642 waarin key [' . $key . '] de waarde ' . $value . ' heeft<br>';
