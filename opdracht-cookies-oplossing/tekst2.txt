@@ -1,0 +1,5 @@
+{
+   "0": {"username":"jan", "password":"paswoord01"},
+   "1": {"username":"piet", "password":"paswoord02"},
+   "2": {"username":"joris", "password":"paswoord03"}
+ }
