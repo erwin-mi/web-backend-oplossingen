@@ -1,0 +1,15 @@
+<div class="opdracht-include-require">
+    <section class="body group">
+    	<?php foreach $artikels as $key => $value: ?>
+        	  <article>
+                    <h1><?= $artikels['title']></h1>
+                    <p><?= $artikels['text']></p>
+                    <p>
+                        <?php foreach $artikels[tags] as $key: ?>
+                                    <?= $artikels['tags']>
+                        <?php endforeach; ?>
+                    </p>
+                </article>
+        <?php endforeach; ?>
+    </section>
+</div>

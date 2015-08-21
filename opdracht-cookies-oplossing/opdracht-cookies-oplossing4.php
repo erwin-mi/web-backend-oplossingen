@@ -4,7 +4,7 @@
 	var_dump($userpass);
 	$isAuthenticated = FALSE;
 	$message = '';
-	$expiration = time() + 3600;
+	$expiration = 0;
 	
 	if (isset($_POST['remember'])) 
 	{
@@ -17,7 +17,7 @@
 	//LOGOUT
 	if (isset($_GET['cookie'])) {
 		if ($_GET['cookie'] == 'delete') {
-			setcookie('authenticated','', time() - 3600 );
+			setcookie('authenticated','', time() - 360 );
 			header('location: opdracht-cookies-oplossing4.php');
 		}
 	}

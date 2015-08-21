@@ -8,7 +8,7 @@
 	//LOGOUT
 	if (isset($_GET['cookie'])) {
 		if ($_GET['cookie'] == 'delete') {
-			setcookie('authenticated','', time() - 3600 );
+			setcookie('authenticated','', time() - 360 );
 			header('location: opdracht-cookies-oplossing1.php');
 		}
 	}
@@ -18,7 +18,7 @@
 	{
 		if (($_POST['username'] == $userpass[0]) && ($_POST['password'] == $userpass[1]))
 		{
-			setcookie( 'authenticated', TRUE, time() + 3600 );
+			setcookie( 'authenticated', TRUE, time() + 360 );
 			header( 'location: opdracht-cookies-oplossing1.php' );
 		} 
 		else 

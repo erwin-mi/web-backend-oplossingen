@@ -4,7 +4,7 @@
 	$password = $userpass[1];
 	$isAuthenticated = FALSE;
 	$message = '';
-	$expiration = time() + 3600;
+	$expiration = 0;
 	
 	if (isset($_POST['remember'])) 
 	{
