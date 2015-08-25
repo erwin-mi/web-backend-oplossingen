@@ -1,0 +1,535 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Opdracht classes: portfolio</title>
+        <link rel="stylesheet" href="http://web-backend.local/css/global.css">
+        <link rel="stylesheet" href="http://web-backend.local/css/facade.css">
+        <link rel="stylesheet" href="http://web-backend.local/css/directory.css">
+    </head>
+    <body class="web-backend-opdracht">
+        
+        <section class="body">
+            
+            <h1>Opdracht classes: portfolio</h1>
+
+            <ul>
+                <li>
+                    Bouw een simpele portfolio-website met een simpele header (moet minstens een navigatie bevatten) – body – footer structuur. Je mag zelf kiezen hoe uitgebreid je dit doet. Werk met een externe css file!
+
+                    <div class="facade-minimal" data-url="http://www.app.local/index.php">
+                        <div class="portfolio">
+                        <link href='http://fonts.googleapis.com/css?family=Raleway:400,900,700,200' rel='stylesheet' type='text/css'>
+                         <style>
+                            .facade-minimal
+                            {
+                                padding:0px;
+                                padding-top:57px;
+                                background-color:#354052;
+                                
+                            }
+
+                            .portfolio
+                            {
+                                font-family: "Raleway", sans-serif;
+                                font-size:14px;
+                            }
+                            
+                            .portfolio img
+                            {
+                                max-width:100%;
+                                border:none;
+                            }
+
+                            .portfolio header
+                            {
+                                position:relative;
+                                z-index:10;
+                                background-color:#FFFFFF;
+                                padding-left: 12px;
+                                box-shadow: 0 8px 6px -5px rgba(0,0,0,0.3);
+                            }
+
+                            .portfolio header a
+                            {
+                               color:#2B3536; 
+                            }
+
+                            .portfolio header .logo
+                            {
+                                float:left;
+                                font-size:18px;
+                                line-height:48px;
+                                text-transform:uppercase;
+                                font-weight:300;
+                            }
+
+                            .portfolio header .logo a
+                            {
+                                float:left;
+                                font-size:18px;
+                                text-decoration:none;
+                            }
+                            .portfolio header .logo span
+                            {
+                                font-weight:500;
+                            }
+
+                            .portfolio nav
+                            {
+                                float:right;
+                            }
+                            
+                            .portfolio nav ul
+                            {
+                                list-style-type:none;
+                                padding:0px;
+                                margin-top:0;
+                            }
+                            
+                             .portfolio nav li
+                             {
+                                display:inline-block;
+                                border-left:1px solid lightgrey;
+                                margin-bottom:0;
+
+                             }
+
+                            .portfolio nav li a
+                            {
+                                display:inline-block;
+                                line-height:48px;
+                                padding:0 18px;
+                                text-decoration:none;
+                                transition: all 0.2s ease-in;
+                            }
+
+                            .portfolio nav li a:hover
+                            {
+                                background-color:#ebf1f5;
+                            }
+                            
+                            .portfolio-aside
+                            {
+                                float:  right;
+                                width:30%;
+                            }
+                            .all-about-float
+                            {
+                                
+                            }
+                            .portfolio-content
+                            {
+                                float:  left;
+                                width: 70%;
+                                background-color:#FFFFFF;
+                            }
+
+                            .portfolio-content .head
+                            {
+                                position:relative;
+                            }
+
+                            .portfolio-content .head .date
+                            {
+                                position:absolute;
+                                width:40px;
+                                height:40px;
+                                top:24px;
+                                right:24px;
+                                background-color:rgba(255,255,255,0.5);
+                                border-radius:3px;
+                                text-align:center;
+                                font-weight:bold;
+                                font-size:24px;
+                                line-height:26px;
+                                text-transform:uppercase;
+                            }                                                                       
+                                                                                                                                                                     
+                            .portfolio-content .head .date span
+                            {
+                                display:block;
+                                font-size:10px;                     
+                                line-height:10px;
+                            }       
+                                                            
+                            .portfolio-content .head .title
+                            {
+                                position:absolute;
+                                bottom:0;
+                                left:0;
+                                right:0;
+                                color:#FFFFFF;
+                                padding: 24px;
+                            }
+
+                            .portfolio-content .head .title h1
+                            {
+                                border-bottom:none;
+                                font-size:64px;
+                                font-weight:500;
+                                margin:0;
+                            }
+
+                            .portfolio-content .head .title span
+                            {
+                                text-align:left;
+                            }
+                            
+                            .portfolio-content .content
+                            {
+                                padding:24px 48px;
+                                line-height:1.5em;
+                            }
+
+                            .portfolio-content .content p:first-child
+                            {
+                                font-weight:bold;
+                            }
+
+                            .portfolio-aside
+                            {
+                                color:#c9d0dd;
+                                font-size:13px;
+                            }
+
+                            .portfolio-aside ul
+                            {
+                                list-style-type:none;
+                                padding-left:12px;
+                            }
+                            
+                            .portfolio-aside .cat li
+                            {
+                                display:inline-block;
+                            }
+                            
+                            .portfolio-aside .cat li:not(:last-child):after
+                            {
+                                content:",";
+                            }
+                            
+                            .portfolio-aside h1
+                            {
+                                border-bottom:0;
+                                margin:0;
+                                font-weight:700;
+                                font-size:12px;
+                                color:#65748d;
+                            }
+
+                            .portfolio-aside section
+                            {
+                                margin-bottom:24px 0;
+                                padding:24px;
+                                box-shadow: 0 1px 0px #293241, 
+                                            0 2px 0px #30394a, 
+                                            0 3px 0px #30394a,
+                                            0 4px 0px #293241;
+                            }
+
+                            .portfolio-aside section:first-child
+                            {
+                                padding-top:0px;
+                            }
+
+                            .portfolio-aside .profile
+                            {
+                                text-align:center;
+                            }
+
+                            .portfolio-aside .profile img
+                            {
+                                border-radius:100%;
+                                max-width:70%;
+                                margin:12.5% 12.5% 0% 12.5%;
+                            }
+
+                            .portfolio-aside .profile h1
+                            {
+                                border-bottom:0;
+                                margin:0;
+                                font-size:18px;
+                                font-weight:500;
+                                color:#c9d0dd;
+                            }
+
+                             .portfolio .body article h1:first-child
+                            {
+                                font-size:24px;
+                                margin:12px 0;
+                            }
+                            
+                            .portfolio footer
+                            {
+                                padding:6px;
+                                color:#FFFFFF;
+                                text-align:center;
+                                background-color:#ecf2f6;
+
+                                box-shadow: inset 0 8px 6px -5px rgba(0,0,0,0.3);                            }
+                        </style>
+
+                        <header class="group">
+                            <div class="logo">
+                               <a href="#">Theo <span>Jansen</span></a>
+                            </div>
+                            <nav>
+                                <ul>
+                                    <li><a href="#">Strandbeesten</a></li><!--
+                                    --><li><a href="#">Galerij</a></li><!--
+                                    --><li><a href="#">Blog</a></li><!--
+                                    --><li><a href="#">Contact</a></li>
+                                </ul>
+                            </nav>
+                        </header>
+
+                        <section class="portfolio-body group">
+                            
+                            <section class="portfolio-content">
+                                <article>
+                                    <div class="head">
+                                        <img src="http://web-backend.local/img/strandbeest-theo-jansen.jpg" alt="Strandbeest Theo Jansen">
+                                        <div class="date">9<span>sep</span></div>
+                                        <div class="title">
+                                            <h1>animaris rhinoceros</h1>
+                                            <span>een nomadische thuisbasis</span>
+                                        </div>
+                                        
+                                    </div>
+                                    <div class="content">
+
+                                        <p>De Animaris Rhonoceros Transport weegt 2,8 ton en is een zijtak in de strandbeesten evolutie maar kan desondanks door één enkele persoon worden voortbewogen door slim gebruik te maken van de wind. Je kunt er in zitten. Zoals een auto een vervoertuigd paard is en een vliegtuig gezien kan worden als een vervoertuigde vogel, zo kan de Animaris Rhinoceros Transport opgevat worden als een vervoertuigde Animaris (de Latijnse naam voor strandbeest).</p>
+                                        
+                                        <p>De Animaris Rhinoceros Transport die het stadsdeel Nieuw-West in de collectie heeft, is ontworpen door de kunstenaar maar de technische ontwikkeling en realisatie van dit lopende kunstwerk is in 2004 gedaan door het bedrijf Heijmerink | Wagemakers, Nieuwegein.</p>
+
+                                        <p>Het ontwerp waarmee kunstenaar Theo Jansen bij Heijmerink|Wagemakers kwam, was een kartonnen schaalmodel van 20 cm hoog waarin de unieke beweging van de Animaris al lag opgesloten. Het werkelijke beest is 4,5 meter hoog en 6 meter breed.</p>
+
+                                        <p>De Animaris Rhinoceros Transport stond lange tijd in de Albardagracht (in de wijk Geuzenveld-Slotermeer), een plek waar hij niet tot zijn recht kwam. Afgelopen jaren heeft het stadsdeel de deze Animaris laten restaureren en is samen met de kunstenaar gezocht naar een betere plek in het stadsdeel. Dat is Business Park Amsterdam Osdorp (BPAO) geworden. Het kunstwerk wordt in de entreezone in een speciale kooi geplaatst (mei 2014). Het is de bedoeling dat ‘het beest’ zo nu en dan los gaat.</p>
+                                    </div>
+                                </article>
+
+                                <section>
+                                    <a href="#">< ouder artikel</a> |
+                                    <a href="#">nieuwer artikel ></a>
+                                </section>
+                            </section>
+                            
+                            <section class="portfolio-aside">
+                                
+                                <section class="profile">
+
+                                    <img src="http://web-backend.local/img/theo-jansen.jpg" alt="Theo Jansen">
+                                    <h1>Theo Jansen</h1>
+
+                                </section>
+
+                                <section>
+                                    <h1>andere artikels</h1>
+                                    <ul>
+                                        <li>Handgestuurde Animaris Geneticus Ondula</li>
+                                        <li>Alles over de Jansen's Linkage</li>
+                                        <li>The Great Pretender - boek</li>
+                                        <li>Expositie in Japan</li>
+                                        <li>Interview in DWDD</li>
+                                    </ul>
+                                </section>
+
+                                <section>
+                                    <h1>categorieën</h1>
+                                    <ul class="cat">
+                                        <li>strandbeest</li>
+                                        <li>interview</li>
+                                        <li>expositie</li>
+                                        <li>evolutie</li>
+                                        <li>divers</li>
+                                        <li>animaris</li>
+                                        <li>bouwpakket</li>
+                                        <li>techniek</li>
+                                    </ul>
+                                </section>
+
+                                
+                            </section>
+                        </section>
+
+                        <footer>
+                            dit is de footer
+                        </footer>
+                        </div>
+                    </div>
+
+                    <li>Hoewel het aangeraden is alles volledig zelf te bouwen (desnoods probeer je het voorbeeld vanaf 0 na te bouwen), mag je de HTML van het voorbeeld altijd kopiëren</li>
+
+                    <li>
+                        Verknip deze HTML-pagina naar drie verschillende pagina's:
+                        <ul>
+                            <li>header.partial.php (voor de header)</li>
+                            <li>index.partial.php (voor het deel tussen de header en de footer)</li>
+                            <li>footer.partial.php (voor de footer)</li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        De mappenstructuur van deze applicatie ziet er als volgt uit:
+
+                        <ul class="directory">
+                            <li class="folder">
+                                css
+                                <ul>
+                                    <li class="file">global.css</li>
+                                </ul>
+                            </li>
+                            <li class="folder">
+                                classes
+                                <ul>                                    
+                                    <li class="file">HTMLBuilder.php</li>
+                                </ul>
+                            </li>
+                            <li class="folder">
+                                js
+                                <ul>
+                                    <li class="file">script.js</li>
+                                </ul>
+                            </li>
+                            <li class="folder">
+                                html
+                                <ul>
+                                    <li class="file">body.partial.php</li>
+                                    <li class="file">footer.partial.php</li>
+                                    <li class="file">header.partial.php</li>
+                                </ul>
+                            </li>
+                            <li class="file">index.php</li>
+                        </ul>
+                    </li>
+
+                <li><span class="directory-sa-file">global.css</span> dit bevat de css van je pagina.</li>
+
+                    <li><span class="directory-sa-file">script.js</span> de inhoud van dit bestand is <code>console.log( 'dit werkt' );</code></li>
+
+                    <li><span class="directory-sa-file">HTMLBuilder.php</span> 
+
+                        <ul>
+                            <li>Deze bevat een klasse HTMLBuilder</li>
+
+                            <li>Voorzie een manier om de bestandsnamen van de header, body en footer mee te geveren (dmv constructor, dmv setters, ...)</li>
+
+                            <li> Deze bevat de publieke methodes buildHeader, buildFooter en buildBody
+                                <ul>
+                                    <li>buildHeader
+                                        <ul>
+                                            <li>zorgt ervoor dat de header op het scherm verschijnt</li>
+
+                                            <li>Zorg ervoor dat alle bestanden uit de <span class="directory-sa-folder">css</span> map automatisch worden ingeladen. Dus wanneer je een .css bestand verwijdert, mag dit niet in de header verschijnen.</li>
+                                            
+                                            <li></li>
+                                        </ul>
+                                    </li>
+
+                                    <li>buildBody
+                                        <ul>
+                                            <li>zorgt ervoor dat de body op het scherm verschijnt</li>
+                                        </ul>
+                                    </li>
+
+                                    <li>buildFooter
+                                        <ul>
+                                            <li>Zorgt ervoor dat de footer op het scherm verschijnt</li>
+                                            <li>Zorgt ervoor dat alle bestanden uit de <span class="directory-sa-folder">js</span>map automatisch worden ingeladen. Dus wanneer je een .js bestand verwijdert, mag dit niet in de footer verschijnen.</li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <span class="directory-sa-file">index.php</span>
+                        <ul>
+                            <li>roept de autoload-functie aan die instaat voor het  oproepen van de nodige klassen.</li>
+                            <li>maakt een instantie aan van de klasse HTMLBuilder</li>
+                            <li> Je mag zelf kiezen of je bij het aanmaken van deze instantie automatisch de pagina opbouwt of je hierbij gebruik maakt van het aanroepen van de specifieke build-methodes</li>
+                        </ul>
+                    </li>
+
+                    <li class="remark">Het is aan te raden om hier te stoppen en zelf uit te zoeken hoe je deze opdracht moet volbrengen. Werk zoveel mogelijk met methodes, zodat alles wat je in de klasse HTMLBuilder maakt, herbruikbaar is.</li>
+
+                    <li>Zorg ervoor dat je bij het aanmaken van een instantie van de klasse HTMLbuilder, de bestandsnaam van de header, body en footer kan meegeven. Dit kan via de <code>__construct()</code></li>
+
+                    <li>De methode <code>buildHeader()</code> laadt header.partial.html in en implementeert dynamisch de nodige elementen voor css (zie <code>buildCssLinks()</code>).</li>
+
+                    <li>De methode <code>buildBody()</code> laadt body.partial.html in.</li>
+
+                    <li>De methode <code>buildFooter()</code> laadt footer.partial.html in en implementeert denodige elementen voor js (zie <code>buildJsLinks()</code>).</li>
+
+                    <li>Maak een methode <code>findFiles()</code> met de parameters <code>$dir</code>en <code>$file</code>
+                        
+                        <ul>
+                            <li>Deze method returnt alle bestanden in de map waarvan je de extensie meegeeft als argument.</li>
+
+                            <li>Dus bv. <code>findFiles( '', 'js')</code> vindt alle .js bestanden in de map van deze oefening</li>
+
+                            <li>De method returnt alle gevonden bestanden in de vorm van een array</li>
+                        </ul>
+                    </li>
+
+                    <li>Maak een methode <code>buildJsLinks()</code> aan die enkel binnen de klasse aan te roepen is.
+                        
+                        <ul>
+                            <li>Deze method roept de <code>findFiles( directoryVanJsBestanden, 'js' )</code> aan.</li>
+
+                            <li class="remark">Dit is een methode binnen een klasse, maakt dus gebruik van speciale aanroeping!</li>
+
+                            <li>Deze method overloopt het resultaat van de <code>findFiles( 'js', '.js' ) </code> methode en plaatst deze daarna in de gepaste HTML-syntax. Best even opzoeken hoe je naar externe .js-files verwijst in HTML.</li>
+
+                            <li>Elke HTML-element met een link naar het .js bestand wordt in een array geplaatst.</li>
+
+                            <li>De methode returnt één string met alle gevonden .js-bestanden in het de correcte HTML syntax.</li>
+                        </ul>
+                    </li>
+
+                    <li>De methode buildCssLinks() doet exact hetzelfde als buildJsLinks, maar dan voor CSS elementen. Het enige verschil hier is de HTML die gebruikt wordt om CSS-files in te laden.</li>
+
+                    <li>Valideer het resultaat met de W3 validator</li>
+
+                </li> 
+            </ul>
+
+
+            <h1>Opdracht classes: portfolio: uitbreidingen</h1>
+
+            <ul>
+                <li>Zorg ervoor dat de <span class="directory-sa-file">index.php</span> pagina controleert welke get-variabele
+er geset is. Op basis van deze get-variabele wordt er een andere body ingeladen (bv. <code>$_GET['home']</code> => <span class="directory-sa-file">body.partial.html</span>, <cpde>$_GET['contact']</cpde> => <span class="directory-sa-file">contact.partial.html</span>)
+(moeilijkheid: +/-)
+                    <ul>
+                        <li>Mogelijke oplossing: werk met een klasse per pagina (<span class="directory-sa-file">Home.php</span> / <span class="directory-sa-file">Contact.php</span>, ...) die deze variabele invult.</li>
+                    </ul>
+
+                </li>
+
+                <li>Zorg ervoor dat je bepaalde variabelen kan meegeven aan deze buildmethodes zodat je bv. in de <span class="directory-sa-file">index.php</span> kan bepalen welke titel of welke header er moet meegegeven worden. (moeilijkheid: +/-)</li>
+
+                <li>Probeer alle javascript (of css)-bestanden samen te bundelen tot één bestand zodat er maar één JS of CSS-bestand meer wordt ingeladen (moeilijkheid: +/-)
+                    <ul>
+                        <li>Zorg ervoor dat de wanneer je nieuwe css of js files hebt die de oude overschrijven, de cache van de browser of provider niet de oude bestanden teruggeeft -> Zoek op wat cache-busting is en hoe je dit kan oplossen. Pas deze technieken toe op deze oefeningen (moeilijkheid: +)</li>
+
+                        <li>Zorg voor een klein stukje metadata aan het begin van je .css of .js bestand
+                            <ul>
+                                <li>Deze metadata staat in commentaar.</li>
+
+                                <li>Deze metadata bevat de namen van de bestanden die zijn samengevoegd, inclusief de grootte en de aanmaakdatum. (moeilijkheid: +/-)</li>
+
+                                <li>Zorg er nu voor dat er enkel een samengevoegde .css of .js wordt aangemaakt als de grootte en de aanmaakdatum van een van deze bestanden gewijzigd is. (moeilijkheid: +/-)</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            
+        </section>
+        
+    </body>
+</html>
