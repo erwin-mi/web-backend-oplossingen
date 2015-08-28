@@ -22,11 +22,16 @@
 			$fetchAssoc[]	=	$row;
 		}
 		
+		var_dump($fetchAssoc);
+		
 		// Een query klaarmaken. 
-		$queryString2 = 'SELECT bieren.brouwernr, bieren.naam
-						FROM  bieren';
+		$queryString2 = 'SELECT bieren.naam
+						FROM  bieren
+						WHERE bieren.brouwernr = :brouwernr';
 
 		$statement2 = $db->prepare($queryString2);
+		
+		$statement2->bindParam (':brouwernr', $_GET['lijstBrouwerijen']);
 
 		// Een query uitvoeren
 		$statement2->execute();
@@ -60,19 +65,19 @@
     	<p><?php echo $messageContainer ?></p>
         
 		<form action="opdracht-crud-query-oplossing2.php" method="get">
-        <select name="lijst brouwerijen">
-        	<?php foreach ($fetchAssoc as $row): ?>
-            <option value="<?= $row['brnaam'] ?>"><?= $row['brnaam'] ?></option>
+        <select name="lijstBrouwerijen">
+        	<?php foreach ($fetchAssoc as $key => $value): ?>
+            <option value="<?= $value['brouwernr'] ?>"><?= $value['brnaam'] ?></option>
             <?php endforeach ?>
          </select>
         <input type="submit" value="Geef mij alle bieren van deze brouwerij">
         </form>
         
         <table>
-			<?php foreach ($fetchAssoc2 as $row): ?>
+			<?php foreach ($fetchAssoc2 as $row => $value): ?>
             <tr>
                 <td></td>
-                <td><?= $row['naam'] ?></td>
+                <td><?= $value['naam'] ?></td>
             </tr>
             <?php endforeach ?>    
          </table>

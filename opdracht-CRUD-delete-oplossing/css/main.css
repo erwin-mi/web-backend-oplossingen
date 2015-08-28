@@ -1,0 +1,53 @@
+table
+{
+	font-size:12px;
+	overflow:auto;
+}
+
+table th,
+table td
+{
+	padding:4px;
+}
+
+table th
+{
+	background: #DFDFDF;
+	text-align:center;
+}
+
+table tr
+{
+	transition: all 0.2s ease-out;
+}
+
+table tr:hover
+{
+	background-color:lightgreen;
+}
+
+.odd
+{
+	background: #F1F1F1;
+}
+
+.deletion
+{
+	color: #b94a48;
+	background-color: #f2dede;
+}
+
+.input-icon-button
+{
+	border: none;
+	background-color:transparent;
+	cursor:pointer;
+	text-indent:-1000px;
+}
+
+.delete
+{
+	width:16px;
+	height:16px;
+	background: url("http://web-backend.local/img/icon-delete.png") no-repeat;
+}
