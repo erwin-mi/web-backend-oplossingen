@@ -1,0 +1,269 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Opdracht security: login</title>
+        <link rel="stylesheet" href="http://web-backend.local/css/global.css">
+        <link rel="stylesheet" href="http://web-backend.local/css/facade.css">
+        <link rel="stylesheet" href="http://web-backend.local/css/directory.css">
+    </head>
+    <body class="web-backend-opdracht">
+        
+        <section class="body">
+            
+            <h1>Opdracht security: login</h1>
+
+            <ul>
+                <li>In deze oefening leer je een loginmodule te maken, van registratie tot login.</li>
+                <li>Moest je dit nog niet gedaan hebben, maak dan zeker een map aan voor deze opdracht, aangezien er nogal veel bestanden aangemaakt moeten worden.</li>
+            </ul>
+
+            <h1>Opdracht security: stap 1 - registratie</h1>
+
+            <ul>
+                <li>Maak een HTML-pagina, deze bevat enkel HTML, geen PHP logica (tenzij om boodschappen te tonen, zie verder). Deze ziet er als volgt uit:
+
+                    <div class="facade-minimal" data-url="http://www.app.local/registratie-form.php">
+                        <h1>Registreren</h1>
+                        <form>
+                            <ul>
+                                <li>
+                                    <label for="email">e-mail</label>
+                                    <input type="text" id="email">
+                                </li>
+                                <li>
+                                    <label for="password">paswoord</label>
+                                    <input type="password" id="password">
+                                    <input type="submit" name="generatePassword" value="Genereer een paswoord">
+                                </li>
+                            </ul>
+                            <input type="submit" value="Registreer">
+                        </form>
+                    </div>
+                </li>
+
+                <li>De action van dit formulier verwijst naar registratie-process.php. Deze pagina bevat énkel logica, geen HTML.</li>
+
+                <li>Wanneer iemand op 'genereer een paswoord' drukt moet er een paswoord gegenereerd worden.
+                    <ul>
+                        <li>Maak hiervoor een functie <code>generatePassword</code>
+                        
+                            <ul>
+                                <li>Zorg ervoor dat je via deze functie kan bepalen of er hoofdletters, kleine letters, cijfers en speciale tekens (deze mag je hard coderen) in het paswoord moeten voorkomen. Zorg er eveneens voor dat je de lengte van het paswoord kan bepalen.</li>
+                        
+                                <li class="remark">De gebruiker heeft hier geen keuze. Jij gaat als developer gericht moeten beslissen wat voor soort paswoord er gegenereerd moet worden.</li>
+
+                                <li>Deze functie returnt dus een willekeurig paswoord</li>
+                            </ul>
+                        </li>
+
+                        <li>Zorg ervoor dat wanneer er een paswoord gegenereerd wordt dit ook zichtbaar is, dus geen ********, zal zijn voor gebruiker</li>
+
+                        <li>Zorg ervoor dat het paswoord wordt teruggegeven aan de pagina registratie-form.php</li>
+
+                        <li>Zorg er ook voor dat wanneer iemand zijn e-mailadres reeds heeft ingevuld, dat het e-mailadres niet weg is wanneer iemand op 'genereer een paswoord' drukt.</li>
+
+                        <li>Werk met een <code>$_SESSION</code> om deze data door te geven naar registratie-form.php
+                            <ul>
+                                <li>Een <code>$_SESSION</code> array kan multidimensioneel zijn, dus de values van deze array kunnen op hun beurt arrays zijn. Dit kan helpen om data (reeds ingevulde data, error/succesboodschappen, ...) gestructureerd door te geven naar andere pagina's.</li>
+
+                                <li>Vergeet niet deze <code>$_SESSION</code> array leeg te maken op het moment waarop het moet (bv. na toevoegen van de gebruiker aan de database)</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+
+                <li>Wanneer iemand op 'registreer' drukt moet deze persoon toegevoegd worden aan de database & automatisch ingelogd worden.
+                    
+                    <ul>
+                        <li>Maak een database opdracht-security-login aan. In deze database zit een tabel users met de volgende kolommen:
+                            <ul>
+                                <li>index (Primary key)</li>
+                                <li>email (varchar)</li>
+                                <li>salt (varchar)</li>
+                                <li>hashed_password (varchar)</li>
+                                <li>last_login_time (date)</li>
+                            </ul>
+                        </li>
+
+                        <li>Controleer of het e-mailadres geldig is
+                            
+                            <ul>
+                                
+                                <li>Als je dit manueel kan doen, mag dit. Het is voldoende om te controleren of het een ‘@’ en minstens één ‘.’ bevat. Best toch even zoeken, PHP heeft hiervoor speciale functies die veel manueel werk kunnen vermijden.</li>
+
+                                <li>Als het e-mailadres niet geldig is, toon dan een gepaste boodschap dmv de <code>$_SESSION</code> en redirect weer naar registratie-form.php</li>
+
+                                <li>Je mag zelf kiezen hoe je deze foutboodschap laat zien op het formulier (bv pure tekst, klasse toevoegen op input van e-mail, beide, ...). 
+
+                                    <ul>
+
+                                        <li>Je moet wel werken met een <code>$_SESSION</code> variabele, anders kan je de data niet naar verschillende pagina's sturen.</li>
+
+                                        <li>Deze <code>$_SESSION</code> variabele kan op zijn beurt arrays bevatten. Gebruik bv. een <code>$_SESSION['notification']</code> key om een array met foutboodschappen in te plaatsen, bv.
+                                            
+                                            <ul class="array-notation pre">
+                                                
+                                                <li>[ 'notification' ] =>
+                                                    <ul>
+                                                        <ul>
+                                                            <li>['type']    => 'error'</li>
+                                                            <li>['message'] =>  'Dat e-mailadres komt reeds voor in de database.'</li>
+                                                        </ul>
+                                                    </ul>
+                                                </li>
+                                            
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                            
+                            </ul>
+                        </li>
+
+                        <li>Controleer alvorens de data toe te voegen of het e-mailadres reeds in de database users voorkomt.
+                            
+                            <ul>
+                                <li>Als het e-mailadres reeds voorkomt, toon dan een gepaste boodschap dmv de <code>$_SESSION['notification']</code> en redirect naar registratie-form.php</li>
+                            </ul>
+                        </li>
+
+                        <li>Als het e-mailadres geldig is en het komt niet voor in de database, mag de gebruiker aan de database toegevoegd worden.
+                            <ul>
+                                <li>Creëer een willekeurige salt (bv. dmv <code>uniqid(mt_rand(), true)</code> ) en concateneer deze salt samen met het paswoord dat de gebruiker heeft ingevuld.</li>
+
+                                <li>SHA512-hash dit salted password</li>
+
+                                <li>Voeg het e-mailadres, de willekeurig gegenereerde salt en het salted password toe aan de database onder de tabel users. Zorg ervoor dat <code>last_login_time</code> ook geüpdated wordt dmv de SQL-command <code>NOW()</code></li>
+                            </ul>
+                        </li>
+
+                        <li>Wanneer de user succesvol is toegevoegd, mag ook de cookie met key <code>login</code> aangemaakt worden.
+
+                            <ul>
+                                <li>Als value krijgt dit het e-mailadres geconcateneerd met een ',' en gevolgd door de SHA512 hash van het e-mailadres geconcateneerd met de salt</li>
+
+                                <li>Deze cookie is 30 dagen geldig</li>
+                            </ul>
+                        </li>
+
+                        <li>Nadat de cookie geset is, moet er geredirect worden naar dashboard.php</li>
+                    </ul>
+                </li>
+
+                <li class="remark">Normaal gezien mag je niet zomaar iemand automatisch inloggen na registratie. Je moet wachten tot hij zijn account bevestigd heeft via een link die doorgestuurd werd naar het opgegeven e-mailadres. Zo ben je zeker dat de gebruiker is wie hij beweert te zijn. Je mag dit altijd proberen te implementeren, maar hoeft niet. Technisch is deze opdracht al veeleisend genoeg.</li>
+                
+            </ul>
+
+            <h1>Opdracht security: stap 2 -  dashboard</h1>
+
+            <ul>
+                <li>Controleer of de cookie met key <code>login</code> geset is. Als deze niet geset is moet er automatisch geredirect worden naar login-form.php (<a href="#login">zie stap 4</a>)</li>
+
+                <li>Haal de juiste salt op uit de database users-tabel</li>
+
+                <li>Controleer of het de hash van het e-mailadres geconcateneerd met de salt uit de database gelijk is aan de hash-key na de komma uit de cookie.</li>
+
+                <li>Als dit het geval is, mag de inhoud van het dashboard getoond worden, anders moet de cookie <code>unset</code> worden en moet er geredirect worden naar de login pagina.</li>
+
+                <li>Het dashboard ziet er als volgt uit
+                     <div class="facade-minimal" data-url="http://www.app.local/dashboard.php">
+                        <h1>Dashboard</h1>
+                        <a href="">uitloggen</a>
+                    </div>
+                </li>
+
+            </ul>
+
+            <h1>Opdracht security: stap 3 -  logout</h1>
+
+            <ul>
+                <li>Deze pagina verwijdert de cookie</li>
+
+                <li>De $_SESSION['notification'] moet gevuld worden met 'U bent uitgelogd. Tot de volgende keer'. Vergeet de sessie niet te starten.</li>
+
+                <li>Daarna wordt er automatisch geredirect naar login-form.php</li>
+            </ul>
+
+
+            <h1 id="login">Opdracht security: stap 4 -  login</h1>
+
+            <ul>
+                <li>De pagina login-form.php
+
+                    <ul>
+                        <li>
+                            Bevat geen PHP-logica, tenzij het starten van de <code>$_SESSION</code>, het afhandelen van de foutboodschappen en het controleren of de gebruiker reeds is ingelogd. Deze ziet er ongeveer als volgt uit:
+                            
+                            <div class="facade-minimal" data-url="http://www.app.local/login-form.php">
+                                <h1>Inloggen</h1>
+                                <form>
+                                    <ul>
+                                        <li>
+                                            <label for="email">e-mail</label>
+                                            <input type="text" id="email">
+                                        </li>
+                                        <li>
+                                            <label for="password">paswoord</label>
+                                            <input type="password" id="password">
+                                        </li>
+                                    </ul>
+                                    <input type="submit" value="Inloggen">
+                                </form>
+
+                                <p>Nog geen account? Maak er dan eentje aan op de <a href="">registratiepagina</a>.</p>
+
+                                <li>Toon de geschikte boodschap wanneer iemand na het uitloggen op deze pagina terecht komt.</li>
+
+                                <li>De link 'registratiepagina' verwijst naar registratie-form.php</li>
+
+                                <li>Het formulier heeft een action login-process.php. het gaat hier om gevoelige informatie, dus denk aan welke <code>method</code> je in het formulier definiëert.</li>
+                            </div>
+                        </li>
+                    </ul>
+
+                   
+
+                </li>
+
+                <li>De pagina login-process.php
+                    <ul>
+                        <li>Bevat alle PHP logica die instaat voor het afhandelen van het inloggen van een gebruiker en bevat op geen enkel moment HTML code.</li>
+
+                        <li>Deze pagina staat in voor het verifiëren van de login van de gebruiker.</li>
+
+                        <li>Maak een connectie met de database en selecteer alle gegevens op basis van het ingevulde e-mailadres.
+                            
+                            <ul>
+                                <li>Als de user niet werd teruggevonden, zet dan een gepaste boodschap in de <code>$_SESSION['notification']</code> en redirect naar login-form.php</li>
+
+                                <li>Als de user werd teruggevonden, mag het tweede deel van het script worden ingezet.</li>
+                            </ul>
+                        </li>
+
+                        <li>Haal de salt op uit de database zoals bij de pagina registratie-process.php</li>
+
+                        <li> Controlleer of de hash van het (ingevulde paswoord + salt), gelijk is aan de password-kolom uit de database</li>
+
+                        <li>Als dit niet het geval is zet dan een gepaste boodschap in de <code>$_SESSION['notification']</code> en redirect naar login-form.php</li>
+
+                        <li>Als dit wel het geval is, moet de cookie geset worden.
+                            <ul>
+                                <li>Dit gebeurt op dezelfde manier als bij registratie-process.php</li>
+
+                                <li>Redirect naar dashboard.php</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+
+                <li>Zorg er nu voor dat wanneer een gebruiker naar een registratie-form of login-form pagina surft die niet phpoefening029-dashboard.php is én wanneer een gebruiker ingelogd is, dus wanneer de cookie geset is, hij automatisch naar dashboard.php wordt doorverwezen </li>
+
+                <li>Zorg er dan ook voor dat wanneer iemand rechtstreeks naar een van de confirm pagina's surft, hij automatisch wordt geredirect naar het loginformulier</li>
+            </ul>
+            
+        </section>
+
+    </body>
+</html>
