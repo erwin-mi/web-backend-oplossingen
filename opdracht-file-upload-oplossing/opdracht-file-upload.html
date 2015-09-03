@@ -1,0 +1,187 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Opdracht file upload</title>
+        <link rel="stylesheet" href="http://web-backend.local/css/global.css">
+        <link rel="stylesheet" href="http://web-backend.local/css/facade.css">
+        <link rel="stylesheet" href="http://web-backend.local/css/directory.css">
+    </head>
+    <body class="web-backend-opdracht">
+
+        <style>
+            
+            .profile-picture
+            {
+                max-width:400px;
+                margin: 16px 0px;
+                display:block;
+            }
+
+        </style>
+        
+        <section class="body">
+            
+            <h1>Opdracht file upload</h1>
+
+            <ul>
+                <li>Het is de bedoeling om verder te bouwen op het CMS dat je voordien hebt gemaakt. Nu is het de bedoeling dat je de je persoonlijke gegevens kan aanpassen, met de focus op het toevoegen van een profielfoto.</li>
+
+                <li>
+                    Maak een nieuwe folder aan en kopieer de opdracht van het CMS
+                    <ul>
+                        <li>Maak een extra map aan: <span class="directory-sa-folder">img</span>. Hier komen de profielfoto's in.</li>
+                    </ul>
+                </li>
+
+                <li>
+                    Pas de database aan
+                    <ul>
+                        <li>Kopieer de database van het CMS zodat de database van deze oefening en die van het CMS niet met elkaar in conflict komen.</li>
+
+                        <li>Voeg bij de tabel users een kolom profile_picture toe</li>
+
+                        <li>Deze kolom bevat enkel de naam van de afbeelding, nooit de afbeelding zelf. Hoewel dit wel mogelijk is, is een database hier niet voor gemaakt.</li>
+                    </ul>
+                </li>
+
+                <li>
+                    Voeg in het dashboard de link toe naar gegevens-wijzigen-form.php
+                    <div class="facade-minimal" data-url="http://www.app.local/dashboard.php">
+
+                        <p><a href="">Terug naar dashboard</a> | Ingelogd als test@test.be | <a href="">uitloggen</a></p>   
+                        
+                        <h1>Dashboard</h1>
+                        
+                        <ul>
+                            <li><a href="">Artikels</a></li>
+                            <li><a href="">Gegevens wijzigen</a></li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+
+            <h1>File Upload: Stap 1: Gegevens wijzigen formulier</h1>
+
+            <ul>
+                <li>
+                    Deze pagina ziet er ongeveer als volgt uit
+                    <div class="facade-minimal" data-url="http://www.app.local/gegevens-wijzigen-form.php">
+
+                        <p><a href="">Terug naar dashboard</a> | Ingelogd als test@test.be | <a href="">uitloggen</a></p>   
+                        
+                        <h1>Gegevens wijzigen</h1>
+                        
+                        <form>
+                            
+                            <ul>
+                                
+                                <li>
+                                    <label for="profile_picture">Profielfoto
+                                        <img class="profile-picture" src="http://web-backend.local/img/elon-musk-koraynergiz.jpg" alt="Profielfoto">
+                                    </label>
+                                    <input type="file" id="profile_picture" name="profile_picture">
+                                </li>
+
+                                <li>
+                                    <label for="email">e-mail</label>
+                                    <input type="text" id="email" name="email" value="test@test.be">
+                                </li>
+
+                            </ul>
+
+                            <input type="submit" value="Gegevens wijzigen">
+                        </form>
+                    </div>
+                </li>
+
+                <li>Vergeet niet dat bij een <code>&lt;form&gt;</code> dat een file-upload bevat, de <code>enctype="multipart/form-data"</code> moet toegevoegd worden.</li>
+
+                <li>Het formulier werkt met POST als <code>method</code> en heeft een <code>action</code> die verwijs naar gegevens-bewerken.php</li>
+
+                <li>Haal alle gegevens op van de gebruiker op basis van de cookie-value en vul deze in in de gepaste input-velden.
+
+                    <ul>
+                        <li>Laat een placeholder zien (denk aan Facebook) wanneer er nog geen profielfoto is geüpload.</li>
+
+                        <li>Denk ook aan het alt-attribuut bij de profielfoto. Het e-mailadres is hier voldoende.</li>
+                    </ul>
+                </li>
+
+                
+            </ul>
+
+            <h1>File Upload: Stap 1: Gegevens wijzigen verwerken</h1>
+
+            <ul>
+                    
+                <li>
+                    Deze pagina controleert of er een file is geüpload en of deze voldoet aan bepaalde voorwaarden
+
+                    <ul>
+                        <li>Het moet een .png, .jpg of .gif zijn</li>
+                        <li>Het bestand mag niet groter zijn dan 2mb</li>
+                    </ul>
+
+                </li>
+
+                <li>Als er een error is op het <code>$_FILE</code>-niveau moet er geredirect worden naar gegevens-wijzigen-form.php en de gepaste boodschap getoond worden.</li>
+
+                <li>Als het bestand voldoet aan de voorwaarden moet de bestandsnaam als volgt worden samengesteld: timestamp_bestandsnaam.extensie</li>
+
+                <li>
+                    Controleer ook of het bestand met de nieuwe bestandsnaam reeds voorkomt in de <span class="directory-sa-folder">img</span> map.
+
+                    <ul>
+                        <li>Komt de bestandsnaam reeds voor in de afbeeldingmap, moet er automatisch een nieuwe bestandsnaam gegenereerd worden.</li>
+
+                        <li>Doe dit door bv. de timestamp opnieuw te genereren</li>
+                    </ul>
+                </li>
+
+                <li>Als alle controles achter de rug zijn, mag de afbeelding geüpload worden naar de <span class="directory-sa-folder">img</span> map
+
+                    <ul>
+                        <li>Let goed op welke path je gebruikt om te üploaden naar de server. Als je iets wil verplaatsen op de server, gebruik je geen URL maar de lokale path van de folder op de serverschijf.</li>
+                    </ul>
+
+                </li>
+
+                <li>Als de upload geslaagd is, mag je de nieuwe gegevens (het e-mailadres en de nieuwe bestandsnaam) toevoegen aan de database</li>
+
+                <li>Als je met tracking details hebt gewerkt, vergeet deze dan ook niet aan te passen wanneer de gegevens gewijzigd worden</li>
+
+                <li>Na het wijzigen van de gegevens in de database, mag je een redirect uitvoeren naar de gegevens-wijzigen-form.php pagina en toon je een gepaste boodschap (bv. "Gegevens werden succesvol gewijzigd")</li>
+
+                <li>Als alles goed verlopen is, dan zou nu op de 'gegevens wijzigen' pagina een profielfoto moeten verschijnen.</li>
+
+                <li>Zorg voor een max-width op de profielfoto (bv. 400px). Later kan je een thumbnail implementeren (zie cursus ivm 'Image Manipulation')</li>
+
+            </ul>
+
+            <h1>Uitbreidingen</h1>
+
+            <ul>
+                <li>Zorg ervoor dat je meerdere foto's kan uploaden
+                    <ul>
+                        <li>Dit hoeft niet per sé tegelijkertijd. Eén voor een uploaden en dan een beheermodule die verwijderen van foto's toelaat is voldoende.</li>
+                    </ul>
+                </li>
+
+                <li>Zorg ervoor dat een thumbnail van de afbeelding wordt gegenereerd.
+                    <ul>
+                        <li>Wanneer je naar 'Gegevens wijzigen' surft, wordt de thumbnail getoond</li>
+                        <li>Wanneer je op de profielfoto thumbnail klikt, krijg je de grote versie te zien.</li>
+                        <li>Je mag hiervoor werken met een lightbox, bv. <a href="http://lokeshdhakar.com/projects/lightbox2/">http://lokeshdhakar.com/projects/lightbox2/</a></li>
+                    </ul>
+                </li>
+
+                <li>Zorg ervoor dat je profielfoto naast je e-mailadres wordt getoond (in klein formaat, bv. 16x16) wanneer je bent ingelogd.</li>
+            </ul>
+            
+        </section>
+        
+        
+    </body>
+</html>
