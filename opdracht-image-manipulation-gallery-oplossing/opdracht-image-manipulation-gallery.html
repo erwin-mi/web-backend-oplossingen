@@ -1,0 +1,356 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Opdracht Image Manipulation: Gallery</title>
+        <link rel="stylesheet" href="http://web-backend.local/css/global.css">
+        <link rel="stylesheet" href="http://web-backend.local/css/facade.css">
+        <link rel="stylesheet" href="http://web-backend.local/css/directory.css">
+    </head>
+    <body class="web-backend-opdracht">
+        
+        <section class="body">
+
+        <style>
+        
+            .opdracht-image-manipulation-gallery caption
+            {
+                display:block;
+            }
+
+
+            .gallery li
+            {
+                margin-bottom: 24px;
+            }
+
+            .gallery li button
+            {
+                margin-left:40px;
+            }
+
+            .gallery li + li
+            {
+                border-top: 1px solid #EEEEEE;
+            }
+
+        </style>
+            
+            <h1>Opdracht Image Manipulation: Gallery</h1>
+
+            <ul>
+                <li>Deze opdracht is een heel primitieve fotogallerij waarbij je afbeeldingen kan uploaden.</li>
+
+                <li>De afbeeldingen worden in de originele dimensies opgeslagen, maar er wordt ook een thumbnail voor elke foto gegenereerd.</li>
+                
+                <li>De foto’s kunnen verwijderd worden, waarna ze worden verzameld in de vuilbak, de <span class="directory-sa-folder">uploads/bin/</span> map</li>
+
+                <li>
+
+                    Deze galerij ziet er ongeveer als volgt uit:
+                    
+                    <div class="facade-minimal opdracht-image-manipulation-gallery" data-url="http://www.app.local/gallery.php">
+                        
+                        <h1>Fotogallerij</h1>
+
+                        <a href="">Foto toevoegen</a>
+                        
+                        <form action="">
+
+                            <ul class="gallery">
+                                <li>
+                                    <figure>
+                                        <img src="http://web-backend.local/img/pb-thumb-01.jpg" alt="Perry Bible 01 Thumb">
+                                        <figcaption>Perry Bible 022</figcaption>
+                                    </figure>
+                                    <button>Verwijderen</button>
+                                </li>
+                                <li>
+                                    <figure>
+                                        <img src="http://web-backend.local/img/pb-thumb-02.jpg" alt="Perry Bible 02 Thumb">
+                                        <figcaption>Perry Bible 182</figcaption>
+                                    </figure>
+                                    <button>Verwijderen</button>
+                                </li>
+                                <li>
+                                    <figure>
+                                        <img src="http://web-backend.local/img/pb-thumb-03.gif" alt="Perry Bible 03 Thumb">
+                                        <figcaption>Perry Bible 246</figcaption>
+                                    </figure>
+                                    <button>Verwijderen</button>
+                                </li>
+                            </ul>
+                        </form>
+                    </div>
+                </li>
+
+                <li>De mappen/bestandenstructuur ziet er als volgt uit:
+                    <ul class="directory">
+                        <li class="folder">uploads
+                            <ul>
+                                <li class="folder">bin</li>
+                                <li class="folder">img
+                                    <ul>
+                                        <li class="folder">thumbs</li>
+                                        <li class="file">.htaccess</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="file">photo-delete.php</li>
+                        <li class="file">photo-upload.php</li>
+                        <li class="file">photo-upload-form.php</li>
+                        <li class="file">gallery.php</li>
+                        <li class="file">verboden-toegang.php</li>
+                    </ul>
+
+                </li>
+                <li>
+                    Maak een database aan specifiek voor deze opdracht. Hierin komt een tabel <code>gallery</code> die de volgende kolommen bevat:
+
+                    <ul>
+                        <li>id (PK)</li>
+                        <li>file_name (varchar)</li>
+                        <li>title (varchar)</li>
+                        <li>caption (text)</li>
+                        <li>is_archived (int, standaard 0)</li> 
+                    </ul>
+                </li>
+            </ul>
+
+            <h1>Stap 1: foto's uploaden formulier</h1>
+
+            <ul>
+                
+                <li>
+                    Maak een HTML-formulier waarmee je bestanden kan uploaden. Dit ziet er ongeveer als volgt uit:
+                    <div class="facade-minimal" data-url="http://www.app.local/photo-upload-form.php">
+                    
+                        <a href="">Terug naar de gallerij</a>
+
+                        <h1>Foto uploaden</h1>
+
+                        <form>
+                            <ul>
+                                <li>
+                                    <label for="username">Bestand uploaden</label>
+                                    <input type="file" id="file" name="file">
+                                </li>
+                                <li>
+                                    <label for="title">Titel</label>
+                                    <input type="text" id="title" name="title">
+                                </li>
+                                <li>
+                                    <label for="description">Beschrijving</label>
+                                    <input type="text" id="description" name="description">
+                                </li>
+                            </ul>
+                            <input type="submit" name="submit">
+                        </form>
+                    </div>
+                </li>
+
+                <li>De <code>action</code> van dit formulier verwijst naar de photo-upload.php pagina</li>
+
+                <li>Zorg ervoor dat de juiste foutboodschappen op deze pagina getoond kunnen worden (<code>$_SESSION</code>)</li>
+
+            </ul>
+
+            <h1>Stap 2: Foto uploaden verwerken</h1>
+
+            <ul>
+                <li>Maak een pagina photo-upload.php aan. Deze pagina staat in voor het feitelijke uploaden en het genereren van een thumb van de foto.</li>
+
+                <li>Deze pagina controleert of de juiste <code>$_POST</code>-waarde geset zijn en, indien nodig, redirect naar het formulier en toont de foutboodschap.</li>
+
+                <li>Er moet gecontroleerd worden of de foto aan de volgende voorwaarden voldoet:
+                    <ul>
+                        <li>extensie: jpg, gif, png</li>
+                        <li>grootte: max. 2MB</li>
+                        
+                    </ul>
+                </li>
+
+                <li>Als er niet aan deze voorwaarden wordt voldaan moet er geredirect worden naar het formulier en moet de juiste foutboodschap getoond worden.</li>
+
+                <li>Maak een functie aan die een unieke bestandsnaam kan genereren.
+                    <ul>
+                        <li>Deze functie concateneert een <code>timestamp()</code> met de bestandsnaam en neemt hier een MD5-hash van. </li>
+                    </ul>
+                </li>
+
+                <li>Controleer of de bestandsnaam reeds voorkomt in de <span class="directory-sa-folder">uploads/img</span> map
+                    <ul>
+                        <li>Als dit het geval is, genereer dan een nieuwe naam met dezelfde functie die je net hebt aangemaakt.</li>
+                    </ul>
+                </li>
+
+                <li>Upload daarna het bestand naar de <span class="directory-sa-folder">uploads/img/</span> map</li>
+
+                <li>Maak een functie <code>createThumb()</code> aan
+                    <ul>
+                        <li>Deze functie maakt een thumbnail van het zonet opgeslagen origineel met een dimensie van 50px x 50px</li>
+                        <li>Voer de nodige bewerkingen uit op basis van de bestands-extensie
+                            <ul>
+                                <li>De bestandsnaam moet je mogelijk dus meegeven als argument en opvangen met een parameter</li>
+                            </ul>
+                        </li>
+                        <li>De bestandsnaam van de thumbs moet van het formaat hashedname_thumbs.extensie zijn</li>
+                        <li>Sla de thumbnail op in de <span class="directory-sa-folder">uploads/img/thumbs/</span> map</li>
+                    </ul>
+                </li>
+
+                <li>Controleer of het uploaden van het origineel en het aanmaken van de thumbnail gelukt is</li>
+
+                <li>Zoja, maak een connectie met de database
+                    <ul>
+                        <li>Voer een <code>INSERT INTO</code> uit op de gallery tabel waarbij je de nodige data invoert.</li>
+
+                        <li class="remark">De bestandsnaam is nu gelijk aan de md5 hash.</li>
+
+                        <li>Slaag images nooit op in de database. Een database dient enkel voor tekst!</li>
+                    </ul>
+                </li>
+
+                <li>Als alles gelukt is, voer dan een redirect uit naar het toevoegen formulier met een gepaste boodschap.</li>
+            </ul>
+
+            <h1>Stap 3: Gallery</h1>
+
+            <ul>
+                
+                <li>
+                    Deze pagina bevat de fotogallerij met een overzicht van alle foto's zoals bij het begin beschreven. Het ziet er ongeveer als volgt uit:
+                    
+                    <div class="facade-minimal opdracht-image-manipulation-gallery" data-url="http://www.app.local/gallery.php">
+                        
+                        <h1>Fotogallerij</h1>
+
+                        <a href="">Foto toevoegen</a>
+                        
+                        <form action="">
+
+                            <ul class="gallery">
+                                <li>
+                                    <figure>
+                                        <img src="http://web-backend.local/img/pb-thumb-01.jpg" alt="Perry Bible 01 Thumb">
+                                        <figcaption>Perry Bible 022</figcaption>
+                                    </figure>
+                                    <button>Verwijderen</button>
+                                </li>
+                                <li>
+                                    <figure>
+                                        <img src="http://web-backend.local/img/pb-thumb-02.jpg" alt="Perry Bible 02 Thumb">
+                                        <figcaption>Perry Bible 182</figcaption>
+                                    </figure>
+                                    <button>Verwijderen</button>
+                                </li>
+                                <li>
+                                    <figure>
+                                        <img src="http://web-backend.local/img/pb-thumb-03.gif" alt="Perry Bible 03 Thumb">
+                                        <figcaption>Perry Bible 246</figcaption>
+                                    </figure>
+                                    <button>Verwijderen</button>
+                                </li>
+                            </ul>
+                        </form>
+                    </div>
+                </li>
+
+                <li>Alle foto's waarvan de <code>is_archived</code> waarde niet gelijk is aan <code>0</code> worden in de gallerij getoond</li>
+
+                <li>
+                    Elk list-item bevat
+                    <ul>
+                        <li>
+                            Een <code>a</code>-element
+                            <ul>
+                                <li>Dit verwijst naar de originele afbeelding </li>
+                                <li>En bevat een <code>img</code> element met een verwijzing naar de thumbnail</li>
+                                <li class="remark">De naam van de thumbnail zit niet in de database. Hiervoor kan je een functie schrijven die de naam van de thumbnail terugggeeft op basis van de gewone filename</li>
+                                <li>De alt van de thumbnail is gelijk aan de titel uit de database</li>
+                            </ul>
+
+                        </li>
+                        <li>Een <code>figcaption</code> als onderschrift bij de foto</li>
+                    </ul>
+                </li>
+
+                <li>Deze pagina heeft ook een formulier met als <code>action</code> een verwijzing naar de photo-upload.php pagina.
+                    <ul>
+                        <li>Stel de juiste <code>method</code> in</li>
+                        <li>Kies zelf hoe je het ID van de foto dat verwijderd moet worden, zal doorsturen naar de photo-upload.php pagina (via een button en één groot formulier, via een upload type hidden en verschillende kleine formuliertjes, ...)</li>
+                    </ul>
+                </li>
+
+            </ul>
+
+            <h1>Stap 4: Foto verwijderen</h1>
+
+            <ul>
+                <li>Maak een pagina photo-delete.php aan. Deze pagina controleert of de nodige post-waarde geset zijn en indien nodig, voert een redirect uit en toont de juiste foutboodschap op de gallery.php pagina</li>
+
+                <li>Gebruik een CONSTANT om de <span class="directory-sa-folder">upload/img/</span>, <span class="directory-sa-folder">upload/img/thumb/</span> en nu ook de <span class="directory-sa-folder">upload/bin/</span> mappen de definiëren. Je mag deze 'configuratie-variabelen' eventueel in een apart bestandje config.php zetten dat je bij het begin van het script inlaadt.</li>
+
+                <li>Hergebruik de functie de de thumbname uit de gewone filename kan halen (classes?)</li>
+
+                <li>Selecteer alle gegeven uit de database waarvan het id gelijk is aan de post-waarde die juist is doorgegeven. <span class="tip"> <code>var_dump( $_POST )</code></span></li>
+
+                <li>Verplaats het originele en het thumb-bestand BEIDEN naar de <span class="directory-sa-folder">uploads/bin/</span> map <span class="tip"><code>rename()</code></span>
+                
+                    <ul>
+                        <li>Hierbij kan je best ook eerst controleren of het bestand effectief bestaat alvorens het te verplaatsen om mogelijke conflicten te vermijden <span class="tip"><code>file_exists()</code></li>
+                    </ul>
+                </li>
+
+                <li>Als dit gelukt is, maak je een connectie met de database en zet je de <code>is_archived</code> van die bepaalde foto op <code>1</code>.</li>
+
+                <li>Als alles gelukt is, voer dan een redirect uit naar de gallerij met een gepaste boodschap.</li>
+
+            </ul>
+
+            <h1>Stap 5: .htaccess</h1>
+
+            <ul>
+                <li>Deze .htaccess zorgt ervoor dat enkel jpg, png of gifs getoond kunnen worden wanneer er een resource opgevraagd wordt uit de <span class="directory-sa-folder">uploads/</span> map.</li>
+
+                <li>Wanneer er andere bestanden in deze folder worden uitgevoerd, moet er doorverwezen worden naar verboden-toegang.php</li>
+
+            </ul>
+
+
+            <h1>Stap 6: Verboden toegang</h1>
+
+            <ul>
+                <li>Maak een pagina verboden-toegang.php aan</li>
+
+                <li>Deze vemeldt de boodschap 'verboden toegang'.</li>
+            </ul>
+
+            
+            <h1>Uitbreidingen</h1> 
+
+            <ul>
+                <li>PHP: zorg ervoor dat er een thumbnail wordt gemaakt die in verhouding staat met de rest van de afbeelding (crop & resize) (moeilijkheid: +)</li>
+
+                <li>JavaScript/jQuery: zorg ervoor dat je een preview krijgt van de afbeeldingen die je uploaden (moeilijkheid: +/-)</li>
+
+                <li>JavaScript/jQuery: Zorg ervoor dat je voor het uploaden kan bepalen welk deel van de afbeelding gecropped/gereiszed moet worden. (tip: bestaan hier JavaScript/jQuery libraries voor?) (moeilijkheid: ++)</li>
+
+                <li>JavaScript/jQuery: Zorg voor een multiple file-uploader (hoe zou je het formulier oplossen?) (moeilijkheid: +++)</li>
+
+                <li>JavaScript/jQuery: Zorg ervoor dat wanneer je in de gallerij op een afbeelding klikt, je niet naar een afbeelding surft, maar dat er een div verschijnt met daarin de grote versie van de afbeelding.(moeilijkheid: +)
+                    
+                    <ul>
+                        <li>Dit moet met ajax: maak een pagina foto-ajax-request.php aan, deze returnt een JSON-formaat met alle data die nodig is</li>
+
+                        <li>JavaScript/jQuery vangt dit op en vult de data in in de nodige elementen.</li>
+                    </ul>
+
+                </li>
+            </ul>
+        </section>
+
+    </body>
+</html>
