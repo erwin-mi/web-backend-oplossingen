@@ -1,0 +1,2 @@
+RewriteEngine On
+RewriteRule ^admin/rasmus/?$ original.php?role=admin&user=rasmus

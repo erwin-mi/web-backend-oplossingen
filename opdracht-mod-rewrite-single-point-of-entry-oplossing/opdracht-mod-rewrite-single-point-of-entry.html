@@ -1,0 +1,289 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Opdracht mod_rewrite: single point of entry</title>
+        <link rel="stylesheet" href="http://web-backend.local/css/global.css">
+        <link rel="stylesheet" href="http://web-backend.local/css/facade.css">
+        <link rel="stylesheet" href="http://web-backend.local/css/directory.css">
+    </head>
+    <body class="web-backend-opdracht">
+        
+        <section class="body">
+            
+            <h1>Opdracht mod_rewrite: single point of entry</h1>
+
+            <ul>
+                <li>Deze oefening is een theoretische herwerking van de CRUD opdracht tot één geheel.</li>
+
+                <li>
+                    De folderstructuur ziet er als volgt uit:
+
+                    <ul class="directory">
+                        <li class="folder">opdracht-mod-rewrite-single-point-of-entry
+                            <ul>
+                                <li class="folder">classes
+                                    <ul>
+                                        <li class="file">Bieren-class.php</li>
+                                    </ul>
+                                </li>
+                                <li class="file">.htaccess</li>
+                                <li class="file">index.php</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+
+                <li>De opdracht maakt gebruik van een 'single point of entry'. Dit wil zeggen dat de hele website maar één toegangspunt heeft, namelijk de index.php Dit stel je in dmv een .htaccess bestand
+  
+                <li class="tip">Zet in deze index.php een <code>var_dump()</code> van de <code>$_GET</code> variabele zodat je kan testen of de .htaccess zijn werkt doet. Later wordt dit aangepast.</li>
+
+            <h1>Opdracht mod_rewrite: single point of entry: deel 1: .htaccess</h1>
+
+            <ul>
+
+                <li>Zet in de index.php pagina een <code>var_dump()</code> van de <code>$_GET</code> variabele, zodat je ziet wat de outpout van de RewriteRule is</li>
+                
+
+                <li>Dit kan enkel in samenspraak met een .htaccess bestand. Baseer je op het .htaccess bestand uit voorbeeld-mod-rewrite-get.
+                    
+                    <ul>
+                        <li>Geef elke url een nieuwe RewriteRule. Dit is niet de meest geschikte methode, maar voorlopig wel de simpelste (later zien we slechts met één rewriterule hetzelfde kunnen doen)</li>
+
+                        <li>Het .htaccess bestand moet de volgende clean urls kunnen omzetten:
+
+                            <ul>
+                                <li>http://www.app.local/bieren/overview/1/
+                                    
+                                    <ul>
+                                        <li>bieren is de waarde van de <code>$_GET</code> variabele <code>controller</code></li>
+                                        <li>De controller-waarde moet je hard coderen in de url</li>
+                                        <li>overview is de waarde van de get-variable <code>method</code></li>
+                                        <li>Deze value moet je opvangen met een group</li>
+                                        <li>1 is waarde van de <code>$_GET</code> variabele <code>id</code></li>
+                                        <li>Deze value moet je opvangen met een group</li>
+
+                                        <li>
+                                            <div class="facade-minimal" data-url="http://www.app.local/bieren/overview/1/">
+
+                                                <h1>index.php</h1>
+
+                                                <pre>
+Array
+(
+    [controller] => bieren
+    [method] => overview
+    [id] => 1
+)
+                        </pre>
+                        
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </li>
+
+                                <li>
+                                    http://www.app.local/bieren/insert/
+
+                                    <ul>
+                                        <li>bieren is de waarde van de <code>$_GET</code> variabele <code>controller</code></li>
+                                        <li>De controller-waarde moet je hard coderen in de url</li>
+                                        <li>insert is de waarde van de get-variable <code>method</code></li>
+                                        <li>Deze value moet je opvangen met een group</li>
+
+                                        <li>
+                                            <div class="facade-minimal" data-url="http://www.app.local/bieren/insert/">
+
+                                                <h1>index.php</h1>
+
+                                                <pre>
+Array
+(
+    [controller] => bieren
+    [method] => insert
+)
+                        </pre>
+                        
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </li>
+
+                                <li>
+                                    http://www.app.local/bieren/delete/1/
+                                    <ul>
+                                        <li>bieren is de waarde van de <code>$_GET</code> variabele <code>controller</code></li>
+                                        <li>De controller-waarde moet je hard coderen in de url</li>
+                                        <li>delete is de waarde van de get-variable <code>method</code></li>
+                                        <li>Deze value moet je opvangen met een group</li>
+
+                                        <li>
+                                            <div class="facade-minimal" data-url="http://www.app.local/bieren/delete/1/">
+
+                                                <h1>index.php</h1>
+
+                                                <pre>
+Array
+(
+    [controller] => bieren
+    [method] => delete
+    [id] => 1
+)
+                        </pre>
+                        
+                                            </div>
+                                        </li>
+                                    </ul>
+                                    
+                                </li>
+
+                                <li>
+                                    http://www.app.local/bieren/update/1/
+                                    <ul>
+                                        <li>bieren is de waarde van de <code>$_GET</code> variabele <code>controller</code></li>
+                                        <li>De controller-waarde moet je hard coderen in de url</li>
+                                        <li>update is de waarde van de get-variable <code>method</code></li>
+                                        <li>Deze value moet je opvangen met een group</li>
+                                        <li>het getal 1 is de waarde van de <code>$_GET</code> variabele <code>id</code>. Dit getal kan variabel zijn</li>
+                                        <li>Deze value moet je opvangen met een group</li>
+
+                                        <li>
+                                             <div class="facade-minimal" data-url="http://www.app.local/bieren/update/1/">
+
+                                                <h1>index.php</h1>
+                        
+                                                <pre>
+Array
+(
+    [controller] => bieren
+    [method] => update
+    [id] => 1
+)
+                                                </pre>
+                        
+                                            </div>
+                                        </li>
+                                    </ul>
+                                    
+                                </li>
+                            </ul>
+
+                        </li>
+                    </ul>
+
+                </li>
+            </ul>
+
+            <h1>Opdracht mod_rewrite: single point of entry: deel 2: index.php & classes/Bieren-class.php</h1>
+
+            <ul>
+                
+                <li>Op basis van de url (= verschillende <code>$_GET</code>-variabelen) worden er bepaalde klasses aangesproken. In dit geval wordt telkens de <code>Bieren</code> klasse aangesproken (= controller) en wordt er een verschillende methode (overview/insert/delete/update) van deze klasse uitgevoerd, naargelang de URL waarnaar gesurft wordt.</li>
+
+                <li>
+                    Maak dus een instantie van de klasse Bieren aan in de index.php pagina. Je kan deze instantie hardcoden, maar beter is om dit dynamisch te laten gebeuren op basis van de <code>$_GET[ 'controller' ]</code> variabele. Er zijn verschillende manieren om dit dynamisch te programmeren:
+                    
+                    <ul>
+                        <li>Je maakt een <code>switch</code> aan die de <code>$_GET[ 'controller' ]</code> controleert en op basis daarvaan een instantie van de overeenstemmende klasse aanmaakt.</li>
+
+                        <li>Of, je gebruikt de <code>$_GET[ 'controller' ]</code> value letterlijk als klassenaam. Hierdoor wordt de value gebruikt om een instantie te maken van een klasse. Zo moet je niet telkens een nieuwe switch-case aanpaken per nieuwe controller die je toevoegt. <span class="tip"><a href="http://stackoverflow.com/questions/4578335/creating-php-class-instance-with-a-string">Bekijk deze post op Stack overflow om meer te weten te komen.</a></span></li>
+
+                        <li>Dit is een eerste kennismaking met een design pattern: een zogenaamde factory. Deze maakt objecten (instantie van de <code>Bieren</code>-klasse) op basis van de onderdelen ( de value van de <code>$_GET[ 'controller' ]</code>) die er aan worden meegegeven.</li>
+                    </ul>
+                </li>
+
+                <li>Het is de bedoeling dat de <code>Bieren</code>-klasse 4 verschillende methodes krijgt
+                    <ul>
+                        <li>overview</li>
+                        <li>insert</li>
+                        <li>delete</li>
+                        <li>update</li>
+                    </ul>
+                    maak deze dan ook aan en plaats in elke methode een echo met de naam van de methode (bv. <code>echo '&lt;h1&gt;overview&lt;/h1&gt;'</code>)
+                </li>
+
+                <li>Pas nu je factory zo aan dat er ook wordt gekeken naar de <code>$_GET[ 'method' ]</code> en deze zal uitvoeren, waardoor je als je naar een bepaalde url surft, je de echo van die methode te zien zal krijgen. Dit ziet er ongeveer als volgt uit:
+
+                    <div class="facade-minimal" data-url="http://www.app.local/bieren/overview/1/">
+
+                        <h1>index.php</h1>
+
+                        <pre>
+Array
+(
+    [controller] => bieren
+    [method] => overview
+)
+                        </pre>
+                        
+                        
+                        <h1>Overview</h1>
+
+                    </div>
+                </li>
+
+                <li>Als je naar de verschillende URLs surft en je ziet telkens de echo van de juiste methode verschijnen dan heb je het begin van een werkende 'single point of entry' gemaakt en heb je de eerste stappen gezet richting een bruikbaar, dynamisch MVC-framework. Goed bezig!</li>
+            </ul>
+
+            <h1>Opdracht mod_rewrite: single point of entry: deel 3: uitbreidingen</h1>
+
+            <ul>
+                <li>
+                    Zorg ervoor dat je geen verschillende .htaccess rules meer moet schrijven. (moeilijkheid: +/-)
+
+                    <ul>
+                        <li>Dit doe je door maar twee groepen te gebruiken in de RewriterRule en niets meer hard te coderen.</li>
+                        <li>
+                            bv. voor de URL http://www.app.local/controller/value1/value1/value.../valueN
+                            <ul>
+                                <li>
+                                    <ul>
+                                        <li>http://www.app.local/<strong>controller</strong>/value1/value1/value.../valueN is de eerste groep</li>
+
+                                        <li>De eerste groep staat in voor het dynamisch opvangen van de controller</li>
+
+                                        <li>Maak op basis van deze waarde een instantie van de overeenstemmende klasse aan.</li>
+
+                                    </ul>
+                                </li>
+                                <li>
+                                    <ul>
+                                        <li>http://www.app.local/controller/<strong>value1/value1/value.../valueN</strong> is de tweede groep</li>
+
+                                        <li>De tweede groep staat voor alle methodes en argumenten die aan deze methodes moeten meegegeven worden</li>
+
+                                        <li>Deze volledige groep geef je dan bv. door aan een functie</li>
+
+                                        <li>Die explodeert deze string van de vorm ‘map/map/map/ op basis van de '/' (de mappen separator)</li>
+
+                                        <li>Controleert vervolgens welke values er uit de explode komen en spreekt de juiste methode aan en geeft er de juiste argumenten aan mee.</li>
+
+                                    </ul>
+                                </li>
+                                
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+
+                <li>
+                    Implementeer nu de code van de oefeningen 23, 24, 25, 26 en 27 in de juiste klasses. (moeilijkheid: +)
+
+                    <ul>
+                        <li>Je mag volledig zelf kiezen hoe je dit doet, maar een goede werkwijze is om zoveel mogelijk op te splitsen in klasses en deelmethodes
+                            <ul>
+                                <li>Database klasse met Aparte methode voor connectie met de database en het uitvoeren van een query</li>
+                                <li>View klasse met methode voor het returnen van de view</li>
+                                <li>Controller klasses Bieren/Brouwers/Users/... die elk hun bewerkingen op de overeenstemmende tabel kunnen uitvoeren.</li>
+                                <li>...</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+
+        </section>    
+        
+    </body>
+</html>
